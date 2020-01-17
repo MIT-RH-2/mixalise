@@ -5,25 +5,34 @@ using UnityEngine.XR.MagicLeap;
 
 public class MapMagicLeapHandTracking : MonoBehaviour
 {
-    public Transform TargetLeftHand;
-    public Transform TargetRightHand;
+    public Transform targetLeftHand;
+    public Transform targetRightHand;
 
     private void Start()
     {
         MLHands.Start();
     }
 
-    void Update()
-    {
-        var leftWrist = MLHands.Left.Wrist;
-        var rightWrist = MLHands.Right.Wrist;
-
-        TargetLeftHand.position = leftWrist.Center.Position;
-        TargetRightHand.position = rightWrist.Center.Position;
-    }
-
     void OnDestroy()
     {
         MLHands.Stop();
+    }
+
+    void Update()
+    {
+        if (MLHands.Left != null)
+        {
+            UpdateHand(MLHands.Left, targetLeftHand);
+        }
+
+        if (MLHands.Right != null)
+        {
+            UpdateHand(MLHands.Right, targetRightHand);
+        }
+    }
+
+    void UpdateHand(MLHand hand, Transform target)
+    {
+        target.position = hand.Wrist.Center.Position;
     }
 }
