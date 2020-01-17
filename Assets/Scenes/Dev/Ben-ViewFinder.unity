@@ -326,6 +326,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5260321819300644599, guid: 9cabdeff809cc420bb1b582af39e6614,
+        type: 3}
+      propertyPath: m_RenderingPath
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260321819300644599, guid: 9cabdeff809cc420bb1b582af39e6614,
+        type: 3}
+      propertyPath: m_TargetEye
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5260321820427190048, guid: 9cabdeff809cc420bb1b582af39e6614,
         type: 3}
       propertyPath: m_Name

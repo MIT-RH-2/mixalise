@@ -27,6 +27,11 @@ public class ViewFinder : MonoBehaviour
         int width = vfCamera.pixelWidth;
         int height = vfCamera.pixelHeight;
 
+        if (width + height == 0) {
+            Debug.Log($"Camera size is {width}x{height}, not doing the thing");
+            return;
+        }
+
         float ar = (float)height / width;
 
         int tWidth = textureWidth;
