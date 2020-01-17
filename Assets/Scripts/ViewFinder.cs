@@ -50,7 +50,8 @@ public class ViewFinder : MonoBehaviour
 
         Renderer planeRenderer = this.vfPlane.GetComponent<Renderer>();
         Material mat = planeRenderer.material;
-        mat.SetTexture("_BaseMap", this.texture);
+        // mat.SetTexture("_BaseMap", this.texture);
+        mat.mainTexture = this.texture;
 
     }
 
