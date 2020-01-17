@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
+=======
+>>>>>>> dcba312e6ad470ad7e453d64f512a3ca962af15f
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -10,7 +13,11 @@
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 
+<<<<<<< HEAD
 # Asset meta data should only be ignored when the corresponding asset is also ignored
+=======
+# Never ignore Asset meta data
+>>>>>>> dcba312e6ad470ad7e453d64f512a3ca962af15f
 !/[Aa]ssets/**/*.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
@@ -58,3 +65,19 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+<<<<<<< HEAD
+=======
+# MacOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Unity Project Settings (cert)
+/ProjectSettings/ProjectSettings.asset
+
+# Unity Artifacts
+*.package
+*.mpk
+.out/
+>>>>>>> dcba312e6ad470ad7e453d64f512a3ca962af15f
