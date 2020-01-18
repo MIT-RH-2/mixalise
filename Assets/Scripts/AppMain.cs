@@ -5,6 +5,7 @@ using UnityEngine.XR.MagicLeap;
 
 public class AppMain : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
