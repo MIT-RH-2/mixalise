@@ -57,6 +57,11 @@ public class MLHandGrabber : MonoBehaviour
             return;
         }
 
+        if (!hand.IsVisible)
+        {
+            return;
+        }
+
         var isDoingGrabGesture = hand.KeyPose == grabPose;
 
         if (isDoingGrabGesture != isGrabbing)
@@ -67,9 +72,9 @@ public class MLHandGrabber : MonoBehaviour
             if (isGrabbing)
             {
                 movingGrabbables = new List<MLHandGrabbable>(collidingGrabables);
-                Debug.Log(movingGrabbables.Count + " " + collidingGrabables.Count);
                 movingGrabbables.ForEach((grabable) => { grabable.StartGrab(this); });
-            } else
+            }
+            else
             {
                 movingGrabbables.ForEach((grabable) => { grabable.StopGrab(this); });
                 movingGrabbables = null;

@@ -6,7 +6,7 @@ public class MLHandGrabbable : MonoBehaviour
 {
     private bool isKinematicAtGrab;
     private Vector3 grabOffset;
-    private Transform oldParent;
+    private Transform startingParent;
 
     private void Start()
     {
@@ -14,11 +14,12 @@ public class MLHandGrabbable : MonoBehaviour
         {
             Debug.LogError("Grabbable needs a RigidBody");
         }
+
+        startingParent = transform.parent;
     }
 
     public void StartGrab(MLHandGrabber grabber)
     {
-        oldParent = transform.parent;
         transform.SetParent(grabber.transform, true);
 
         var rigid = GetComponent<Rigidbody>();
@@ -34,7 +35,7 @@ public class MLHandGrabbable : MonoBehaviour
 
     public void StopGrab(MLHandGrabber grabber)
     {
-        transform.SetParent(oldParent, true);
+        transform.SetParent(startingParent, true);
 
         var rigid = GetComponent<Rigidbody>();
 
