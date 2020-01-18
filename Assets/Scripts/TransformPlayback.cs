@@ -112,10 +112,11 @@ public class TransformPlayback : MonoBehaviour
     void DoPlayback() {
         this.currentFrameIdx = 0;
 
-        while(this.playing && this.currentFrameIdx < this.timeline.Count) {
+        while(this.playing) {
             this.currentFrame = this.timeline[this.currentFrameIdx];
             Thread.Sleep((int)this.currentFrame.time);
             this.currentFrameIdx++;
+            this.currentFrameIdx = this.currentFrameIdx % this.timeline.Count;
         }
     }
 }
