@@ -17,14 +17,28 @@ public class TransformRecorder : MonoBehaviour
     private Thread writeThread = null;
 
     void Start() {
-        StreamRecorder.Instance.AddTransformRecorder(this);
+
+        if (StreamRecorder.Instance != null) {
+            StreamRecorder.Instance.AddTransformRecorder(this);
+        }
+
+        if (StreamPlayback.Instance != null) {
+
+            Debug.Log("Playback mode");
+
+            TransformPlayback playback = GetComponent<TransformPlayback>();
+            if (playback == null) {
+                playback = gameObject.AddComponent(typeof(TransformPlayback)) as TransformPlayback;
+            }
+        }
     }
 
     void OnDestroy() {
-
         this.StopRecording();
-        StreamRecorder.Instance.RemoveTransformRecorder(this);
 
+        if (StreamRecorder.Instance != null) {
+            StreamRecorder.Instance.RemoveTransformRecorder(this);
+        }
     }
 
     void Update()
@@ -89,6 +103,7 @@ public class TransformRecorder : MonoBehaviour
             this.stream.Flush();
             this.stream.Close();
             this.stream = null;
+            Debug.Log($"Wrote {GetFileName()}");
         }
 
     }
@@ -101,7 +116,7 @@ public class TransformRecorder : MonoBehaviour
 
             lock (this.changes) {
                 while (this.changes.Count > 0) {
-                    formatter.Serialize(stream, this.changes.Dequeue());
+                    formatter.Serialize(this.stream, this.changes.Dequeue());
                 }
             }
 

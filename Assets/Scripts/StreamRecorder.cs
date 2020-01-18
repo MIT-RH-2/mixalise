@@ -30,22 +30,45 @@ public class StreamRecorder : MonoBehaviour
     void Awake() {
         if (_instance != null) {
             Debug.LogError("Only once instance of StreamRecorder allowed");
+            Destroy(this.gameObject);
             return;
         }
 
         _instance = this;
     }
 
+    public void Start() {
+        StartCoroutine(DoStartRecording());
+    }
+
+    public IEnumerator DoStartRecording() {
+
+        yield return new WaitForSeconds(3);
+        StartRecording();
+    }
+
+    public void OnDestroy() {
+        StopRecording();
+    }
+
     public void StartRecording() {
         this.startTime = Time.time;
-        this.audioRecorder.StartCapture();
         this.transformRecorders.ForEach(x => x.StartRecording());
+        Debug.Log("Recording");
+        
+        if (this.audioRecorder != null) {
+            this.audioRecorder.StartCapture();
+        }
     }
 
     public void StopRecording() {
         this.stopTime = Time.time;
-        this.audioRecorder.StopCapture();
         this.transformRecorders.ForEach(x => x.StopRecording());
+        Debug.Log("Stop Recording");
+
+        if (this.audioRecorder != null) {
+            this.audioRecorder.StopCapture();
+        }
     }
 
     public void SubmitRecording() {
@@ -59,10 +82,17 @@ public class StreamRecorder : MonoBehaviour
     }
 
     public void AddTransformRecorder(TransformRecorder recorder) {
-        if (this.transformRecorders.Contains(recorder)) {
+
+        if (this.recordedObjects.Contains(recorder.UniqueID) && ! this.transformRecorders.Contains(recorder)) {
+            Debug.LogError($"Duplicate TransformRecorder ID detected: {recorder.UniqueID}");
+            return;
+        }
+
+        if (!this.transformRecorders.Contains(recorder)) {
             this.transformRecorders.Add(recorder);
             this.recordedObjects.Add(recorder.UniqueID);
         }
+
     }
 
     public void RemoveTransformRecorder(TransformRecorder recorder) {

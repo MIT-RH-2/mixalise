@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 713211690253886882}
+  - component: {fileID: 5653990817154024298}
   m_Layer: 9
   m_Name: TransformCamera
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   m_Father: {fileID: 5260321820427190062}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5653990817154024298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893819798704156572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a3293c6c96144408c760d0da92d807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UniqueID: ec7e3627-d702-4c32-8f56-86f945c00e89
 --- !u!1 &3748772239455571285
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8300400512241357835}
+  - component: {fileID: 287997108559974274}
   m_Layer: 9
   m_Name: TransformQuad
   m_TagString: Untagged
@@ -290,6 +305,19 @@ Transform:
   m_Father: {fileID: 5260321820427190062}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &287997108559974274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8273499474162423662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a3293c6c96144408c760d0da92d807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UniqueID: eea572f1-1af0-4a1e-a3b0-f4cd0cb47197
 --- !u!1001 &1864324185290548162
 PrefabInstance:
   m_ObjectHideFlags: 0
