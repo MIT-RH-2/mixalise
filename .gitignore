@@ -72,3 +72,4 @@ crashlytics-build.properties
 .out/
 
 .DS_Store
+Recordings/

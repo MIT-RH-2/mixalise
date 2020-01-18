@@ -28,6 +28,7 @@ public class TransformPlayback : MonoBehaviour
         this.UniqueID = recorder.UniqueID;
 
         this.ReadPlayback();
+        this.StartPlayback();
 
     }
 
