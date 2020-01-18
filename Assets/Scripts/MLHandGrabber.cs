@@ -79,8 +79,6 @@ public class MLHandGrabber : MonoBehaviour
 
     void OnTriggerEnter(Collider collidingItem)
     {
-        Debug.Log("ON TRIGGER ENTER");
-
         var grabbable = collidingItem.gameObject.GetComponent<MLHandGrabbable>();
 
         if (grabbable == null)

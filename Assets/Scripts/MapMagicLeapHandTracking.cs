@@ -22,11 +22,13 @@ public class MapMagicLeapHandTracking : MonoBehaviour
     {
         if (MLHands.Left != null)
         {
+            Debug.Log("left" + MLHands.Left.Index.KeyPoints[0].Position);
             UpdateHand(MLHands.Left, targetLeftHand);
         }
 
         if (MLHands.Right != null)
         {
+            Debug.Log("right" + MLHands.Right.Index.KeyPoints[0].Position);
             UpdateHand(MLHands.Right, targetRightHand);
         }
     }
@@ -34,5 +36,13 @@ public class MapMagicLeapHandTracking : MonoBehaviour
     void UpdateHand(MLHand hand, Transform target)
     {
         target.position = hand.Wrist.Center.Position;
+
+        var centerToUlnar = hand.Wrist.Ulnar.Position - hand.Center;
+        var centerToRadial = hand.Wrist.Radial.Position - hand.Center;
+        var centerToCenter = hand.Wrist.Center.Position - hand.Center;
+        var handUp = Vector3.Cross(centerToUlnar, centerToRadial);
+
+        var rotation = Quaternion.LookRotation(centerToCenter, handUp);
+        target.rotation = rotation;
     }
 }
