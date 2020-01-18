@@ -13,9 +13,6 @@ public class AudioRecorder : MonoBehaviour
     [SerializeField, Tooltip("The audio source that should capture the microphone input.")]
     private AudioSource _inputAudioSource = null;
 
-    [SerializeField, Tooltip("Controller connection handler")]
-    private ControllerConnectionHandler _controllerConnectionHandler = null;
-    
     private PrivilegeRequester _privilegeRequester = null;
 
     private bool _canCapture = false;
@@ -49,7 +46,7 @@ public class AudioRecorder : MonoBehaviour
         // Before enabling the microphone, the scene must wait until the privileges have been granted.
         _privilegeRequester = GetComponent<PrivilegeRequester>();
         _privilegeRequester.OnPrivilegesDone += HandleOnPrivilegesDone;
-        MLInput.OnControllerButtonDown += HandleOnButtonDown;
+        // MLInput.OnControllerButtonDown += HandleOnButtonDown;
 
     }
 
@@ -72,9 +69,13 @@ public class AudioRecorder : MonoBehaviour
         }
     }
 
-    // void Update() {
-    //     DetectAudio();
-    // }
+    void Update() {
+
+        if (_isCapturing) {
+            DetectAudio();
+        }
+
+    }
 
     #endregion
 
@@ -140,21 +141,22 @@ public class AudioRecorder : MonoBehaviour
 
         if (!_canCapture) {
             Debug.Log((_privilegeRequester.State != PrivilegeRequester.PrivilegeState.Failed) ? "Status: Requesting Privileges" : "Status: Privileges Denied");
-        } else {
+        } else 
+        if (_isCapturing) {
             Debug.Log("Status: capturing");
         }
 
     }
 
-    // private void DetectAudio()
-    // {
-    //     // Analyze the input spectrum data, to determine when someone is speaking.
-    //     _inputAudioSource.GetSpectrumData(_audioSamples, 0, FFTWindow.Rectangular);
-    //     _audioMaxSample = Mathf.Lerp(_audioMaxSample, Mathf.Min(1, _audioSamples.Max() * 100), Time.deltaTime);
+    private void DetectAudio()
+    {
+        // Analyze the input spectrum data, to determine when someone is speaking.
+        _inputAudioSource.GetSpectrumData(_audioSamples, 0, FFTWindow.Rectangular);
+        _audioMaxSample = Mathf.Lerp(_audioMaxSample, Mathf.Min(1, _audioSamples.Max() * 100), Time.deltaTime);
 
-    //     vuMeter.transform.localRotation = Quaternion.Euler(0, 0, _audioMaxSample * 180 - 90);
+        // vuMeter.transform.localRotation = Quaternion.Euler(0, 0, _audioMaxSample * 180 - 90);
 
-    // }
+    }
 
     /// <summary>
     /// Creates a new audio clip within the start and stop range.
@@ -206,25 +208,25 @@ public class AudioRecorder : MonoBehaviour
         UpdateStatus();
     }
 
-    private void HandleOnButtonDown(byte controllerId, MLInputControllerButton button)
-    {
-        if (_controllerConnectionHandler.IsControllerValid(controllerId))
-        {
-            if (_canCapture && button == MLInputControllerButton.Bumper)
-            {
-                // Stop & Start to clear the previous mode.
-                if (_isCapturing)
-                {
-                    Debug.Log("Stop capture");
-                    StopCapture();
-                } else
-                {
-                    Debug.Log("Start capture");
-                    StartCapture();
-                }
-            }
-        }
-    }
+    // private void HandleOnButtonDown(byte controllerId, MLInputControllerButton button)
+    // {
+    //     if (_controllerConnectionHandler.IsControllerValid(controllerId))
+    //     {
+    //         if (_canCapture && button == MLInputControllerButton.Bumper)
+    //         {
+    //             // Stop & Start to clear the previous mode.
+    //             if (_isCapturing)
+    //             {
+    //                 Debug.Log("Stop capture");
+    //                 StopCapture();
+    //             } else
+    //             {
+    //                 Debug.Log("Start capture");
+    //                 StartCapture();
+    //             }
+    //         }
+    //     }
+    // }
 
     public string GetAudioFile() {
         return Path.Combine(Application.persistentDataPath, "recording.wav");

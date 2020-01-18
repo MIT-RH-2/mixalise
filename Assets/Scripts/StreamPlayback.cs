@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class StreamPlayback : MonoBehaviour
@@ -13,6 +14,8 @@ public class StreamPlayback : MonoBehaviour
         }
     }
 
+    public AudioSource AudioContainer;
+
     void Awake() {
         if (_instance != null) {
             Debug.LogError("Only once instance of StreamPlayback allowed");
@@ -21,6 +24,25 @@ public class StreamPlayback : MonoBehaviour
         }
 
         _instance = this;
+    }
+
+    void Start() {
+        string path = "file://" + Path.Combine(Application.persistentDataPath, "recording.wav");
+
+        StartCoroutine(LoadAudio());
+
+    }
+
+    IEnumerator LoadAudio() {
+
+        string path = "file:///" + Path.Combine(Application.persistentDataPath, "recording.wav");
+        WWW url = new WWW(path);
+
+        yield return url;
+
+        AudioContainer.clip = url.GetAudioClip(false, true);
+        AudioContainer.Play();
+
     }
 
 }

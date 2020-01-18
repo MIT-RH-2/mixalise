@@ -17,7 +17,9 @@ public class StreamRecorder : MonoBehaviour
 
     private List<TransformRecorder> transformRecorders = new List<TransformRecorder>();
     private List<string> recordedObjects = new List<string>();
-    private AudioRecorder audioRecorder;
+    public AudioRecorder audioRecorder;
+
+    public bool recording = false;
 
     private float startTime;
     private float stopTime;
@@ -37,21 +39,22 @@ public class StreamRecorder : MonoBehaviour
         _instance = this;
     }
 
-    public void Start() {
-        StartCoroutine(DoStartRecording());
-    }
-
-    public IEnumerator DoStartRecording() {
-
-        yield return new WaitForSeconds(3);
-        StartRecording();
-    }
-
     public void OnDestroy() {
         StopRecording();
     }
 
+    public void ToggleRecording() {
+        if (this.recording) {
+            this.StopRecording();
+        } else {
+            this.StartRecording();
+        }
+    }
+
     public void StartRecording() {
+
+        this.recording = true;
+
         this.startTime = Time.time;
         this.transformRecorders.ForEach(x => x.StartRecording());
         Debug.Log("Recording");
@@ -62,6 +65,9 @@ public class StreamRecorder : MonoBehaviour
     }
 
     public void StopRecording() {
+
+        this.recording = false;
+
         this.stopTime = Time.time;
         this.transformRecorders.ForEach(x => x.StopRecording());
         Debug.Log("Stop Recording");
