@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    public List<Camera> cameras
+    public List<Camera> cameras;
 }
