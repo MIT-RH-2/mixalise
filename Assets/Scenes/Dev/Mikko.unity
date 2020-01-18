@@ -528,6 +528,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetLeftHand: {fileID: 1452957084}
   targetRightHand: {fileID: 1107392069}
+  handRotationEase: 0.9
+  debugPrefab: {fileID: 6934531479054754200, guid: 90bc138eabca54d36ba353ca30998b15,
+    type: 3}
 --- !u!1001 &1375390198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1028,12 +1031,12 @@ MonoBehaviour:
     xrTarget: {fileID: 1452957084}
     rigTarget: {fileID: 1647653701}
     trackingPositionOffset: {x: 0, y: 0, z: 0}
-    trackingRotationOffset: {x: 0, y: 90, z: 0}
+    trackingRotationOffset: {x: -180, y: 270, z: 0}
   rightArm:
     xrTarget: {fileID: 1107392069}
     rigTarget: {fileID: 30449290}
     trackingPositionOffset: {x: 0, y: 0, z: 0}
-    trackingRotationOffset: {x: -180, y: -90, z: 0}
+    trackingRotationOffset: {x: -180, y: 90, z: 0}
   headConstraint: {fileID: 1464136323}
 --- !u!1 &1452957083
 GameObject:
@@ -1198,7 +1201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1638319011
 Transform:
   m_ObjectHideFlags: 0
@@ -1342,7 +1345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1886041057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1422,7 +1425,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1886041056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.07941601, y: 1.4223232, z: 0.852}
+  m_LocalPosition: {x: 0, y: 0, z: 1.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
