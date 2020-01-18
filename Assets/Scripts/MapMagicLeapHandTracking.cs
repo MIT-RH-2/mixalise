@@ -10,7 +10,10 @@ public class MapMagicLeapHandTracking : MonoBehaviour
     public Transform targetLeftHand;
     public Transform targetRightHand;
     public float handRotationEase = 0.1f;
+    public float handNotFoundEase = 0.1f;
     public GameObject debugPrefab;
+    public Transform targetLeftNotFound;
+    public Transform targetRightNotFound;
 
     private Transform debugHandStart;
     private Transform debugHandUp;
@@ -47,16 +50,34 @@ public class MapMagicLeapHandTracking : MonoBehaviour
     {
         if (MLHands.Left != null)
         {
-            UpdateHand(MLHands.Left, targetLeftHand);
+            if (MLHands.Left.IsVisible)
+            {
+                UpdateFoundHand(MLHands.Left, targetLeftHand);
+            } else
+            {
+                UpdateNotFoundHand(targetLeftHand, targetLeftNotFound);
+            }
         }
 
         if (MLHands.Right != null)
         {
-            UpdateHand(MLHands.Right, targetRightHand);
+            if (MLHands.Right.IsVisible)
+            {
+                UpdateFoundHand(MLHands.Right, targetRightHand);
+            } else
+            {
+                UpdateNotFoundHand(targetRightHand, targetRightNotFound);
+            }
         }
     }
 
-    void UpdateHand(MLHand hand, Transform target)
+    void UpdateNotFoundHand(Transform target, Transform notFoundTarget)
+    {
+        target.position = Vector3.Lerp(target.position, notFoundTarget.position, handNotFoundEase);
+        target.rotation = Quaternion.Slerp(target.rotation, notFoundTarget.rotation, handRotationEase);
+    }
+
+    void UpdateFoundHand(MLHand hand, Transform target)
     {
         target.position = hand.Wrist.Center.Position;
 
@@ -66,7 +87,6 @@ public class MapMagicLeapHandTracking : MonoBehaviour
 
         var aToB = b - a;
         var aToC = c - a;
-        var centerToCenter = hand.Wrist.Center.Position - a;
         var handUp = Vector3.Cross(aToB, aToC).normalized;
 
         //var rotation = Quaternion.LookRotation(handUp, Vector3.up);
