@@ -10,8 +10,6 @@ using UnityEngine.XR.MagicLeap;
 public class AudioRecorder : MonoBehaviour
 {
 
-    public GameObject vuMeter;
-
     [SerializeField, Tooltip("The audio source that should capture the microphone input.")]
     private AudioSource _inputAudioSource = null;
 
@@ -74,14 +72,14 @@ public class AudioRecorder : MonoBehaviour
         }
     }
 
-    void Update() {
-        DetectAudio();
-    }
+    // void Update() {
+    //     DetectAudio();
+    // }
 
     #endregion
 
     #region Private Methods
-    private void StartCapture()
+    public void StartCapture()
     {
 
         // Use the first detected Microphone device.
@@ -110,14 +108,14 @@ public class AudioRecorder : MonoBehaviour
         UpdateStatus();
     }
 
-    private void StopCapture()
+    public void StopCapture()
     {
 
         _audioEnd = _inputAudioSource.time;
 
         if (_isCapturing) {
             AudioClip clip = CreateAudioClip(_inputAudioSource.clip, _audioStart, _audioEnd);
-            string path = Path.Combine(Application.persistentDataPath, "recordingZZZ.wav");
+            string path = GetAudioFile();
             AudioClipToWAV(clip, path);
         }
 
@@ -148,15 +146,15 @@ public class AudioRecorder : MonoBehaviour
 
     }
 
-    private void DetectAudio()
-    {
-        // Analyze the input spectrum data, to determine when someone is speaking.
-        _inputAudioSource.GetSpectrumData(_audioSamples, 0, FFTWindow.Rectangular);
-        _audioMaxSample = Mathf.Lerp(_audioMaxSample, Mathf.Min(1, _audioSamples.Max() * 100), Time.deltaTime);
+    // private void DetectAudio()
+    // {
+    //     // Analyze the input spectrum data, to determine when someone is speaking.
+    //     _inputAudioSource.GetSpectrumData(_audioSamples, 0, FFTWindow.Rectangular);
+    //     _audioMaxSample = Mathf.Lerp(_audioMaxSample, Mathf.Min(1, _audioSamples.Max() * 100), Time.deltaTime);
 
-        vuMeter.transform.localRotation = Quaternion.Euler(0, 0, _audioMaxSample * 180 - 90);
+    //     vuMeter.transform.localRotation = Quaternion.Euler(0, 0, _audioMaxSample * 180 - 90);
 
-    }
+    // }
 
     /// <summary>
     /// Creates a new audio clip within the start and stop range.
@@ -226,6 +224,10 @@ public class AudioRecorder : MonoBehaviour
                 }
             }
         }
+    }
+
+    public string GetAudioFile() {
+        return Path.Combine(Application.persistentDataPath, "recording.wav");
     }
 
     public static bool AudioClipToWAV(AudioClip audio, string path)

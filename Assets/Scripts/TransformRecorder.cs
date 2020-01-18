@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
 using System.IO;
 
 using System.Threading;
@@ -10,50 +8,32 @@ using UnityEngine;
 
 public class TransformRecorder : MonoBehaviour
 {
-
-    [Serializable]
-    private class TransformChange {
-        public float time;
-
-        public float px;
-        public float py;
-        public float pz;
-
-        public float rx;
-        public float ry;
-        public float rz;
-        public float rw;
-    }
-
     public string UniqueID = null;
 
     private Queue<TransformChange> changes = new Queue<TransformChange>();
 
     private FileStream stream;
-    private bool running = true;
+    private bool running = false;
     private Thread writeThread = null;
 
     void Start() {
-
-        string path = Path.Combine(Application.persistentDataPath, $"{this.UniqueID}.xform");
-        this.stream = File.Open(path, FileMode.OpenOrCreate);
-
-        this.writeThread = new Thread(new ThreadStart(this.DoWriteTransforms));
-        this.writeThread.Start();
-
+        StreamRecorder.Instance.AddTransformRecorder(this);
     }
 
     void OnDestroy() {
 
-        this.running = false;
-        this.writeThread.Join();
+        this.StopRecording();
+        StreamRecorder.Instance.RemoveTransformRecorder(this);
 
-        stream.Flush();
-        stream.Close();
     }
 
     void Update()
     {
+
+        if (!this.running) {
+            return;
+        }
+
         if (this.transform.hasChanged) {
 
             lock(changes) {
@@ -83,6 +63,36 @@ public class TransformRecorder : MonoBehaviour
         }
     }
 
+    public void StartRecording() {
+
+        this.running = true;
+
+        string path = this.GetFileName();
+        this.stream = File.Open(path, FileMode.OpenOrCreate);
+
+        this.transform.hasChanged = true; // always record OG position
+
+        this.writeThread = new Thread(new ThreadStart(this.DoWriteTransforms));
+        this.writeThread.Start();
+
+    }
+
+    public void StopRecording() {
+        this.running = false;
+
+        if (this.writeThread != null) {
+            this.writeThread.Join();
+            this.writeThread = null;
+        }
+
+        if (this.stream != null) {
+            this.stream.Flush();
+            this.stream.Close();
+            this.stream = null;
+        }
+
+    }
+
     void DoWriteTransforms() {
 
         BinaryFormatter formatter = new BinaryFormatter();
@@ -97,5 +107,9 @@ public class TransformRecorder : MonoBehaviour
 
             Thread.Yield();
         }
+    }
+
+    public string GetFileName() {
+        return Path.Combine(Application.persistentDataPath, $"{this.UniqueID}.xform");
     }
 }

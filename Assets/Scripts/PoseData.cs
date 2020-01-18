@@ -9,7 +9,8 @@ public class PoseData {
 
     public enum PoseAction {
         Started,
-        Completed
+        Completed,
+        Ended
     }
 
     public PoseAction action { get; private set; }

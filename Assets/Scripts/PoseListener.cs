@@ -13,25 +13,49 @@ public class PoseEvent : UnityEvent<PoseData>
 public class PoseListener : MonoBehaviour
 {
 
-    private Coroutine timeout;
-
     public float TimeoutSeconds = 2f;
 
     public MLHandKeyPose Pose = MLHandKeyPose.Ok;
-    public MLHand hand;
+    public MLHandType handType;
 
     public float MinConfidence = 0.9f;
 
-    IEnumerator poseTimeout;
+    public PoseEvent onPoseStartDetected;
+    public PoseEvent onPoseCompleteDetected;
+    public PoseEvent onPoseEndDetected;
+
+    private IEnumerator poseTimeout;
+    private MLHand hand;
+    private Coroutine timeout;
+
+    void Start() {
+
+        if (handType == MLHandType.Left) {
+            hand = MLHands.Left;
+        } else {
+            hand = MLHands.Right;
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (hand == null) {
+            return;
+        }
         
         if (hand.KeyPose == Pose && hand.KeyPoseConfidence >= MinConfidence) {
-            this.timeout = StartCoroutine(this.PoseDetected());
+            if (this.timeout == null) {
+                this.timeout = StartCoroutine(this.PoseDetected());
+            }
         } else {
-            StopCoroutine(this.timeout);
+
+            if (this.timeout != null) {
+                StopCoroutine(this.timeout);
+                onPoseEndDetected.Invoke(new PoseData(PoseData.PoseAction.Ended, this.Pose));
+                this.timeout = null;
+            }
         }
 
     }
@@ -39,12 +63,12 @@ public class PoseListener : MonoBehaviour
     IEnumerator PoseDetected() {
 
         PoseData data = new PoseData(PoseData.PoseAction.Started, this.Pose);
-        new PoseEvent().Invoke(data);
+        onPoseStartDetected.Invoke(data);
 
         yield return new WaitForSeconds(TimeoutSeconds);
 
         data = new PoseData(PoseData.PoseAction.Completed, this.Pose);
-        new PoseEvent().Invoke(data);
+        onPoseCompleteDetected.Invoke(data);
 
     }
 }
