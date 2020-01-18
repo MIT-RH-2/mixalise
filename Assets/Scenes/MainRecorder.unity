@@ -2222,6 +2222,161 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1850708538}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1941578341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1941578342}
+  - component: {fileID: 1941578345}
+  - component: {fileID: 1941578344}
+  - component: {fileID: 1941578343}
+  m_Layer: 0
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1941578342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941578341}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1979696378}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1941578343
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941578341}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1941578344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941578341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d94885b88d848a1822cdcfc9c7266c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inputAudioSource: {fileID: 1941578343}
+--- !u!114 &1941578345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941578341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c890bdf354698ba429472b626542bcc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _privileges: 31000000
 --- !u!1 &1958686279
 GameObject:
   m_ObjectHideFlags: 0
@@ -2293,6 +2448,8 @@ GameObject:
   - component: {fileID: 1979696378}
   - component: {fileID: 1979696377}
   - component: {fileID: 1979696379}
+  - component: {fileID: 1979696381}
+  - component: {fileID: 1979696380}
   m_Layer: 0
   m_Name: AppMain
   m_TagString: Untagged
@@ -2312,6 +2469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31f07594f82145b2b35cf5a0a0fb04d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poseListener: {fileID: 1979696381}
 --- !u!4 &1979696378
 Transform:
   m_ObjectHideFlags: 0
@@ -2329,6 +2487,7 @@ Transform:
   - {fileID: 92306464}
   - {fileID: 1202719588}
   - {fileID: 825275345}
+  - {fileID: 1941578342}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2344,8 +2503,82 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc655f8e014844376888e5328d64d346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioRecorder: {fileID: 1941578344}
+  recording: 0
   RemoteIp: 127.0.0.1
   RemotePort: 4567
+--- !u!114 &1979696380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979696376}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45fd6c4abc72a4242867905dfdb474ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeoutSeconds: 2
+  Pose: 6
+  handType: 1
+  MinConfidence: 0.9
+  onPoseStartDetected:
+    m_PersistentCalls:
+      m_Calls: []
+  onPoseCompleteDetected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1979696379}
+        m_MethodName: ToggleRecording
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPoseEndDetected:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1979696381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979696376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45fd6c4abc72a4242867905dfdb474ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeoutSeconds: 2
+  Pose: 6
+  handType: 0
+  MinConfidence: 0.9
+  onPoseStartDetected:
+    m_PersistentCalls:
+      m_Calls: []
+  onPoseCompleteDetected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1979696379}
+        m_MethodName: ToggleRecording
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPoseEndDetected:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2050822373
 GameObject:
   m_ObjectHideFlags: 0

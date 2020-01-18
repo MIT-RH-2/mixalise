@@ -28,7 +28,7 @@ public class PoseListener : MonoBehaviour
     private MLHand hand;
     private Coroutine timeout;
 
-    void Start() {
+    public void Init() {
 
         if (handType == MLHandType.Left) {
             hand = MLHands.Left;
@@ -44,7 +44,7 @@ public class PoseListener : MonoBehaviour
         if (hand == null) {
             return;
         }
-        
+
         if (hand.KeyPose == Pose && hand.KeyPoseConfidence >= MinConfidence) {
             if (this.timeout == null) {
                 this.timeout = StartCoroutine(this.PoseDetected());
@@ -64,11 +64,13 @@ public class PoseListener : MonoBehaviour
 
         PoseData data = new PoseData(PoseData.PoseAction.Started, this.Pose);
         onPoseStartDetected.Invoke(data);
+        Debug.Log("Pose started");
 
         yield return new WaitForSeconds(TimeoutSeconds);
 
         data = new PoseData(PoseData.PoseAction.Completed, this.Pose);
         onPoseCompleteDetected.Invoke(data);
+        Debug.Log("Pose completed");
 
     }
 }
