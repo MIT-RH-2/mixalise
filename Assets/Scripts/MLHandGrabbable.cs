@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MLHandGrabbable : MonoBehaviour
 {
+    public UnityEvent onGrabStart;
+    public UnityEvent onGrabEnd;
+
     private bool isKinematicAtGrab;
     private Vector3 grabOffset;
     private Transform startingParent;
@@ -30,6 +34,7 @@ public class MLHandGrabbable : MonoBehaviour
             rigid.isKinematic = true;
         }
 
+        onGrabStart.Invoke();
         //grabOffset = transform.position - grabber.transform.position;
     }
 
@@ -43,6 +48,8 @@ public class MLHandGrabbable : MonoBehaviour
         {
             rigid.isKinematic = isKinematicAtGrab;
         }
+
+        onGrabEnd.Invoke();
     }
 
     public void UpdateGrab(MLHandGrabber grabber)
