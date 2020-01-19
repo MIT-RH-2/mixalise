@@ -79,7 +79,8 @@ public class TransformRecorder : MonoBehaviour
         this.running = true;
 
         string path = this.GetFileName();
-        this.stream = File.Open(path, FileMode.OpenOrCreate);
+        // this.stream = File.Open(path, FileMode.OpenOrCreate);
+        this.stream = new FileStream(path, FileMode.Truncate, FileAccess.Write);
 
         this.writeThread = new Thread(new ThreadStart(this.DoWriteTransforms));
         this.writeThread.Start();
