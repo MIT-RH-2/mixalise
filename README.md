@@ -1,4 +1,4 @@
-# Magic Leap Unity Project Template
+# MIT REALITY HACK 2020 - MIXALIZE
 
 ## Project
 
