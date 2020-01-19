@@ -8,15 +8,19 @@ using UnityEngine;
 
 public class TransformRecorder : MonoBehaviour
 {
-    public string UniqueID = null;
+	public RecordingIDSCriptableObject recordingId;
 
-    private Queue<TransformChange> changes = new Queue<TransformChange>();
+	private Queue<TransformChange> changes = new Queue<TransformChange>();
 
     private FileStream stream;
     private bool running = false;
     private Thread writeThread = null;
 
     void Start() {
+        if (recordingId == null)
+		{
+			Debug.LogError("Recording ID is not defined");
+		}
 
         if (StreamRecorder.Instance != null) {
             StreamRecorder.Instance.AddTransformRecorder(this);
@@ -41,41 +45,39 @@ public class TransformRecorder : MonoBehaviour
         }
     }
 
-    void Update()
-    {
+	void Update()
+	{
 
-        if (!this.running) {
-            return;
-        }
+		if (!this.running)
+		{
+			return;
+		}
 
-        if (this.transform.hasChanged) {
+		if (this.transform.hasChanged)
+		{
 
-            lock(changes) {
-                changes.Enqueue(new TransformChange() {
+			lock (changes)
+			{
+				changes.Enqueue(new TransformChange()
+				{
 
-                    time = Time.time,
+					time = Time.time,
 
-                    px = transform.position.x,
-                    py = transform.position.y,
-                    pz = transform.position.z,
+					px = transform.position.x,
+					py = transform.position.y,
+					pz = transform.position.z,
 
-                    rx = transform.rotation.x,
-                    ry = transform.rotation.y,
-                    rz = transform.rotation.z,
-                    rw = transform.rotation.w
+					rx = transform.rotation.x,
+					ry = transform.rotation.y,
+					rz = transform.rotation.z,
+					rw = transform.rotation.w
 
-                });
-            }
+				});
+			}
 
-            this.transform.hasChanged = false;
-        }
-    }
-
-    void OnValidate() {
-        if (String.IsNullOrEmpty(UniqueID)) {
-            UniqueID = System.Guid.NewGuid().ToString();
-        }
-    }
+			this.transform.hasChanged = false;
+		}
+	}
 
     public void StartRecording() {
 
@@ -125,6 +127,6 @@ public class TransformRecorder : MonoBehaviour
     }
 
     public string GetFileName() {
-        return Path.Combine(Application.persistentDataPath, $"{this.UniqueID}.xform");
+        return Path.Combine(Application.persistentDataPath, $"{this.recordingId.id}.xform");
     }
 }
