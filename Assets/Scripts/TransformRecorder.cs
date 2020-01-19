@@ -53,30 +53,25 @@ public class TransformRecorder : MonoBehaviour
 			return;
 		}
 
-		if (this.transform.hasChanged)
-		{
+        lock (changes)
+        {
+            changes.Enqueue(new TransformChange()
+            {
 
-			lock (changes)
-			{
-				changes.Enqueue(new TransformChange()
-				{
+                time = Time.deltaTime,
 
-					time = Time.deltaTime,
+                px = transform.position.x,
+                py = transform.position.y,
+                pz = transform.position.z,
 
-					px = transform.position.x,
-					py = transform.position.y,
-					pz = transform.position.z,
+                rx = transform.rotation.x,
+                ry = transform.rotation.y,
+                rz = transform.rotation.z,
+                rw = transform.rotation.w
 
-					rx = transform.rotation.x,
-					ry = transform.rotation.y,
-					rz = transform.rotation.z,
-					rw = transform.rotation.w
+            });
+        }
 
-				});
-			}
-
-			this.transform.hasChanged = false;
-		}
 	}
 
     public void StartRecording() {
@@ -85,8 +80,6 @@ public class TransformRecorder : MonoBehaviour
 
         string path = this.GetFileName();
         this.stream = File.Open(path, FileMode.OpenOrCreate);
-
-        this.transform.hasChanged = true; // always record OG position
 
         this.writeThread = new Thread(new ThreadStart(this.DoWriteTransforms));
         this.writeThread.Start();

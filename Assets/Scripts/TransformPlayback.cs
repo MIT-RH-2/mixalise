@@ -122,7 +122,7 @@ public class TransformPlayback : MonoBehaviour
             Thread.Sleep((int)(this.currentFrame.time * 1000));
 
             this.currentFrameIdx++;
-            this.currentFrameIdx = this.currentFrameIdx % this.timeline.Count;
+            // this.currentFrameIdx = this.currentFrameIdx % this.timeline.Count;
         }
     }
 }

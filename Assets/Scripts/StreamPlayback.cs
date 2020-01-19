@@ -28,10 +28,7 @@ public class StreamPlayback : MonoBehaviour
     }
 
     void Start() {
-        string path = "file://" + Path.Combine(Application.persistentDataPath, "recording.wav");
-
         playAudio = StartCoroutine(LoadAudio());
-
     }
 
     void OnDestroy() {
