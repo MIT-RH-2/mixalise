@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StreamRecorder : MonoBehaviour
 {
+    public UnityEvent onStartRecord;
+    public UnityEvent onStopRecord;
 
     private static StreamRecorder _instance;
 
@@ -62,6 +65,8 @@ public class StreamRecorder : MonoBehaviour
         if (this.audioRecorder != null) {
             this.audioRecorder.StartCapture();
         }
+
+        onStartRecord.Invoke();
     }
 
     public void StopRecording() {
@@ -75,6 +80,8 @@ public class StreamRecorder : MonoBehaviour
         if (this.audioRecorder != null) {
             this.audioRecorder.StopCapture();
         }
+
+        onStopRecord.Invoke();
     }
 
     public void SubmitRecording() {

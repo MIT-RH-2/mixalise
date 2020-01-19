@@ -307,7 +307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &199992814
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2732,7 +2732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc655f8e014844376888e5328d64d346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onRecordStart:
+  onStartRecord:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 199992818}
@@ -2746,7 +2746,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onRecordEnd:
+  onStopRecord:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 199992818}
