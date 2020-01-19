@@ -19,8 +19,10 @@ public class HandTrackingSnippet : MonoBehaviour
 
 	void Start()
 	{
-		// Start Hands
-		MLHands.Start();
+		if (!MLHands.IsStarted) {
+			// Start Hands
+			MLHands.Start();
+		}
 
 		// List with left and Right hands
 		_hands.Add(MLHands.Left);
@@ -39,8 +41,10 @@ public class HandTrackingSnippet : MonoBehaviour
 
 	void OnDestroy()
 	{
-		// Stop Hands
-		MLHands.Stop();
+		if (MLHands.IsStarted) {
+			// Stop Hands
+			MLHands.Stop();
+		}
 	}
 
 	void Update()

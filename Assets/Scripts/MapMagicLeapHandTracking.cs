@@ -20,7 +20,9 @@ public class MapMagicLeapHandTracking : MonoBehaviour
 
     private void Start()
     {
-        MLHands.Start();
+        if (!MLHands.IsStarted) {
+            MLHands.Start();
+        }
 
         if (debugPrefab != null)
         {
@@ -43,7 +45,9 @@ public class MapMagicLeapHandTracking : MonoBehaviour
 
     void OnDestroy()
     {
-        MLHands.Stop();
+        if (MLHands.IsStarted) {
+            MLHands.Stop();
+        }
     }
 
     void Update()
