@@ -61,7 +61,7 @@ public class TransformRecorder : MonoBehaviour
 				changes.Enqueue(new TransformChange()
 				{
 
-					time = Time.time,
+					time = Time.deltaTime,
 
 					px = transform.position.x,
 					py = transform.position.y,

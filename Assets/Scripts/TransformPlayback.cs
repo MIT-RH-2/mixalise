@@ -66,6 +66,10 @@ public class TransformPlayback : MonoBehaviour
 
     }
 
+    void OnDestroy() {
+        this.StopPlayback();
+    }
+
     void ReadPlayback() {
 
         BinaryFormatter formatter = new BinaryFormatter();
@@ -112,9 +116,11 @@ public class TransformPlayback : MonoBehaviour
     void DoPlayback() {
         this.currentFrameIdx = 0;
 
-        while(this.playing) {
+        while(this.playing && this.currentFrameIdx < this.timeline.Count) {
             this.currentFrame = this.timeline[this.currentFrameIdx];
-            Thread.Sleep((int)this.currentFrame.time);
+
+            Thread.Sleep((int)(this.currentFrame.time * 1000));
+
             this.currentFrameIdx++;
             this.currentFrameIdx = this.currentFrameIdx % this.timeline.Count;
         }
