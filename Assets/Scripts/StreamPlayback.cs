@@ -15,6 +15,7 @@ public class StreamPlayback : MonoBehaviour
     }
 
     public AudioSource AudioContainer;
+    private Coroutine playAudio;
 
     void Awake() {
         if (_instance != null) {
@@ -29,8 +30,15 @@ public class StreamPlayback : MonoBehaviour
     void Start() {
         string path = "file://" + Path.Combine(Application.persistentDataPath, "recording.wav");
 
-        StartCoroutine(LoadAudio());
+        playAudio = StartCoroutine(LoadAudio());
 
+    }
+
+    void OnDestroy() {
+        if (playAudio != null) {
+            AudioContainer.Stop();
+            StopCoroutine(playAudio);
+        }
     }
 
     IEnumerator LoadAudio() {
