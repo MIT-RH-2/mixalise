@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.MagicLeap;
 
 public class AppMain : MonoBehaviour
 {
 
-    public PoseListener poseListener;
+    public List<PoseListener> poseListeners;
 
     // Start is called before the first frame update
     void Start()
@@ -19,9 +19,7 @@ public class AppMain : MonoBehaviour
             MLHands.Start();
         }
 
-        if (poseListener != null) {
-            poseListener.Init();
-        }
+        poseListeners.ForEach(x => x.Init());
 
     }
 

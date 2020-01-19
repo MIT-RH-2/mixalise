@@ -3081,7 +3081,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31f07594f82145b2b35cf5a0a0fb04d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poseListener: {fileID: 1979696381}
+  poseListeners:
+  - {fileID: 1979696381}
+  - {fileID: 1979696380}
 --- !u!4 &1979696378
 Transform:
   m_ObjectHideFlags: 0
@@ -3165,7 +3167,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979696376}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45fd6c4abc72a4242867905dfdb474ac, type: 3}
   m_Name: 
@@ -3496,6 +3498,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709746871038048971, guid: 9cabdeff809cc420bb1b582af39e6614,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8300400512241357835, guid: 9cabdeff809cc420bb1b582af39e6614,
         type: 3}
