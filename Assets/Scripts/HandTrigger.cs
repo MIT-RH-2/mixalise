@@ -12,11 +12,22 @@ public class ColliderToEvent {
 public class HandTrigger : MonoBehaviour
 {
     public List<ColliderToEvent> colliderAndEvents;
+    public List<ColliderToEvent> colliderLeave;
 
     void OnTriggerEnter(Collider collidingItem)
     {
         if (colliderAndEvents != null) {
             colliderAndEvents.ForEach((colliderToEvent) => {
+                if (colliderToEvent.collider == collidingItem) {
+                    colliderToEvent.onTrigger.Invoke();
+                }
+            });
+        }
+    }
+
+    void OnTriggerExit(Collider collidingItem) {
+        if (colliderLeave != null) {
+            colliderLeave.ForEach((colliderToEvent) => {
                 if (colliderToEvent.collider == collidingItem) {
                     colliderToEvent.onTrigger.Invoke();
                 }
