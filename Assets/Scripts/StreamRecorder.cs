@@ -89,14 +89,14 @@ public class StreamRecorder : MonoBehaviour
 
     public void AddTransformRecorder(TransformRecorder recorder) {
 
-        if (this.recordedObjects.Contains(recorder.UniqueID) && ! this.transformRecorders.Contains(recorder)) {
-            Debug.LogError($"Duplicate TransformRecorder ID detected: {recorder.UniqueID}");
+        if (this.recordedObjects.Contains(recorder.recordingId.id) && ! this.transformRecorders.Contains(recorder)) {
+            Debug.LogError($"Duplicate TransformRecorder ID detected: {recorder.recordingId.id}");
             return;
         }
 
         if (!this.transformRecorders.Contains(recorder)) {
             this.transformRecorders.Add(recorder);
-            this.recordedObjects.Add(recorder.UniqueID);
+            this.recordedObjects.Add(recorder.recordingId.id);
         }
 
     }

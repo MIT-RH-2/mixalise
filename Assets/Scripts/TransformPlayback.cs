@@ -25,7 +25,7 @@ public class TransformPlayback : MonoBehaviour
         Debug.Log("StreamPlayback.Start()");
 
         recorder = GetComponent<TransformRecorder>();
-        this.UniqueID = recorder.UniqueID;
+        this.UniqueID = recorder.recordingId.id;
 
         this.ReadPlayback();
         this.StartPlayback();
